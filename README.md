@@ -5,7 +5,12 @@ This project contains base code developed for an introduction to computer graphi
 Import this project into Eclipse to work with it. First create an empty folder where your project will be located. Start Eclipse and select the created folder as workspace. Now you can import the Java code to the workspace by selecting the menu entry "File->Import->Git->Projects from Git->Next". Then choose "Clone URI". In the next dialogue "Source Git Repository", use https://github.com/mzwicker/JRTR-Base-Code-2021.git as URI. Leave the fields "User" and "Password" empty. In the dialogue "Local Destination", choose the created folder. This folder must be empty. After completion of the import, wait a few seconds for the initialization of the project creation. If the Maven build is not done correctly by default and you see errors in the code, update the projects by right-clicking on the project name, then "Maven->Update Project...". Afterwards, you should be able to run the project "simple" and see a rotating cube. If you use an older version of Eclipse, you may have to manually install the plugins for "Maven" and "Git" separately. 
 
 ## Known issues
-This project should compile on Windows, Linux, and macOS, with the exception M1 based macOS systems. The stable release of LWJGL doesn't currently support M1 architecture, and I haven't yet been successful running this project on the early access release version.
+This project should compile on Windows, Linux, and macOS.
+
+### For users running macOS
+On macOS, the JVM argument `-XstartOnFirstThread` must be provided for the Standard Widget Toolkit (SWT) and the Google Widget Toolkit (GWT) to work properly (e.g. creating windows won't work unless the process is run on thread 0). To do this, right click on either the jrtr or the simple project, select "Run As->Run Configurations", and on the "Arguments" tab, enter `-XstartOnFirstThread` into the box labelled "VM arguments."
+
+Also, please find the OpenGL version installed on your device at https://support.apple.com/en-us/HT202823. By default, this code is set to work with OpenGL version 4.1. If you're running on an older machine with an OpenGL version other than 4.1, please modify the value of `GLFW_CONTEXT_VERSION_MAJOR` and `GLFW_CONTEXT_VERSION_MINOR` in `jrtr/src/main/java/jrtr/glrenderer/GLRenderPanel.java` to match the version on your machine.
 
 ### Unsupported GLSL version
 If you encounter a compilation error similar to the one below, you can modify the shaders under `jrtr/shaders` and specify a version supported by your system.
